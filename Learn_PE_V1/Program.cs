@@ -1,8 +1,12 @@
+using CandidateManagement_Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
+builder.Services.AddScoped<IHRAccountRepo, HRAccountRepo>();
+builder.Services.AddScoped<ICandidateProfileRepo, CandidateProfileRepo>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -4,7 +4,21 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Login</h2>
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-danger">
+        @Model.Message
+    </div>
+}
+<form method="post">
+    <div>
+        <label>Email:</label>
+        <input type="text" name="txtEmail" />
+    </div>
+    <div>
+        <label>Email:</label>
+        <input type="password" name="txtPassword" />
+    </div>
+    <button type="submit">Login</button>
+</form>

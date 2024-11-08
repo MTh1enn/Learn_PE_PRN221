@@ -11,7 +11,7 @@ namespace CandidateManagement_Services
     public class HRAccountService : IHRAccountService
     {
         private IHRAccountRepo iAccountRepo;
-        private HRAccountService()
+        public HRAccountService()
         {
             iAccountRepo = new HRAccountRepo();
         }

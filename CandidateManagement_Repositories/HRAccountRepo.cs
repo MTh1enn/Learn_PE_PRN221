@@ -14,7 +14,5 @@ namespace CandidateManagement_Repositories
             => HRAccountDAO.Instance.GetHraccountByEmail(email);
 
         public List<Hraccount> GetHraccounts() => HRAccountDAO.Instance.GetHraccounts();
-
-        
     }
 }

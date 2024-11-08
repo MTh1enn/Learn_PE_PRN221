@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandidateManagement_DAO", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandidateManagement_Repositories", "CandidateManagement_Repositories\CandidateManagement_Repositories.csproj", "{C57DE844-E8C9-4E52-B190-E5A72422361B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandidateManagement_Services", "CandidateManagement_Services\CandidateManagement_Services.csproj", "{5C1C5F04-CC6E-4066-8FAF-7796B7F4B877}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{C57DE844-E8C9-4E52-B190-E5A72422361B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C57DE844-E8C9-4E52-B190-E5A72422361B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C57DE844-E8C9-4E52-B190-E5A72422361B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C1C5F04-CC6E-4066-8FAF-7796B7F4B877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C1C5F04-CC6E-4066-8FAF-7796B7F4B877}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C1C5F04-CC6E-4066-8FAF-7796B7F4B877}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C1C5F04-CC6E-4066-8FAF-7796B7F4B877}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CandidateManagement_BusinessObjects;
+using CandidateManagement_Repositories;
 
 namespace Learn_PE_V1.Pages.CandidateProfilePages
 {
     public class DeleteModel : PageModel
     {
-        private readonly CandidateManagement_BusinessObjects.CandidateManagementContext _context;
+        private readonly ICandidateProfileRepo _candidateProfileRepo;
 
-        public DeleteModel(CandidateManagement_BusinessObjects.CandidateManagementContext context)
+        public DeleteModel(ICandidateProfileRepo candidateProfileRepo)
         {
-            _context = context;
+            _candidateProfileRepo = candidateProfileRepo;
         }
 
         [BindProperty]
@@ -23,13 +24,12 @@ namespace Learn_PE_V1.Pages.CandidateProfilePages
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null || _context.CandidateProfiles == null)
+            if (id == null || _candidateProfileRepo.GetCandidates() == null)
             {
                 return NotFound();
             }
 
-            var candidateprofile = await _context.CandidateProfiles.FirstOrDefaultAsync(m => m.CandidateId == id);
-
+            var candidateprofile =  _candidateProfileRepo.GetCandidateProfileById(id);
             if (candidateprofile == null)
             {
                 return NotFound();
@@ -43,17 +43,16 @@ namespace Learn_PE_V1.Pages.CandidateProfilePages
 
         public async Task<IActionResult> OnPostAsync(string id)
         {
-            if (id == null || _context.CandidateProfiles == null)
+            if (id == null || _candidateProfileRepo.GetCandidates == null)
             {
                 return NotFound();
             }
-            var candidateprofile = await _context.CandidateProfiles.FindAsync(id);
+            var candidateprofile = _candidateProfileRepo.GetCandidateProfileById(id);
 
             if (candidateprofile != null)
             {
                 CandidateProfile = candidateprofile;
-                _context.CandidateProfiles.Remove(CandidateProfile);
-                await _context.SaveChangesAsync();
+                _candidateProfileRepo.DeleteCandidateProfile(candidateprofile);
             }
 
             return RedirectToPage("./Index");

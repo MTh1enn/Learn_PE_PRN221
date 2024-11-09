@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CandidateManagement_BusinessObjects;
+using CandidateManagement_Repositories;
 
 namespace Learn_PE_V1.Pages.CandidateProfilePages
 {
     public class EditModel : PageModel
     {
-        private readonly CandidateManagement_BusinessObjects.CandidateManagementContext _context;
+        private readonly ICandidateProfileRepo _candidateProfileRepo;
+        private readonly IJobPostingRepo _jobPostingRepo;
 
-        public EditModel(CandidateManagement_BusinessObjects.CandidateManagementContext context)
+        public EditModel(ICandidateProfileRepo candidateProfileRepo, IJobPostingRepo jobPostingRepo)
         {
-            _context = context;
+            _candidateProfileRepo = candidateProfileRepo;
+            _jobPostingRepo = jobPostingRepo;
         }
 
         [BindProperty]
@@ -24,18 +27,18 @@ namespace Learn_PE_V1.Pages.CandidateProfilePages
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null || _context.CandidateProfiles == null)
+            if (id == null || _candidateProfileRepo.GetCandidates() == null)
             {
                 return NotFound();
             }
 
-            var candidateprofile =  await _context.CandidateProfiles.FirstOrDefaultAsync(m => m.CandidateId == id);
+            var candidateprofile = _candidateProfileRepo.GetCandidateProfileById(id);
             if (candidateprofile == null)
             {
                 return NotFound();
             }
             CandidateProfile = candidateprofile;
-           ViewData["PostingId"] = new SelectList(_context.JobPostings, "PostingId", "PostingId");
+           ViewData["PostingId"] = new SelectList(_jobPostingRepo.GetJobPostings(), "PostingId", "JobPostingTitle");
             return Page();
         }
 
@@ -48,13 +51,9 @@ namespace Learn_PE_V1.Pages.CandidateProfilePages
                 return Page();
             }
 
-            _context.Attach(CandidateProfile).State = EntityState.Modified;
+            bool updateSuccess = _candidateProfileRepo.UpdateCandidateProfile(CandidateProfile);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
+            if (!updateSuccess)
             {
                 if (!CandidateProfileExists(CandidateProfile.CandidateId))
                 {
@@ -62,7 +61,7 @@ namespace Learn_PE_V1.Pages.CandidateProfilePages
                 }
                 else
                 {
-                    throw;
+                    throw new DbUpdateConcurrencyException();
                 }
             }
 
@@ -71,7 +70,7 @@ namespace Learn_PE_V1.Pages.CandidateProfilePages
 
         private bool CandidateProfileExists(string id)
         {
-          return (_context.CandidateProfiles?.Any(e => e.CandidateId == id)).GetValueOrDefault();
+          return _candidateProfileRepo.GetCandidateProfileById(id) != null;
         }
     }
 }

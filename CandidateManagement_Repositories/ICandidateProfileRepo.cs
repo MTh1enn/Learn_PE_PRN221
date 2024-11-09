@@ -10,5 +10,9 @@ namespace CandidateManagement_Repositories
     public interface ICandidateProfileRepo
     {
         public List<CandidateProfile> GetCandidates();
+        public CandidateProfile GetCandidateProfileById(string id);
+        public bool AddCandidateProfile(CandidateProfile candidateProfile);
+        public bool DeleteCandidateProfile(CandidateProfile candidateProfile);
+        public bool UpdateCandidateProfile(CandidateProfile candidateProfile);
     }
 }

@@ -12,5 +12,14 @@ namespace CandidateManagement_Repositories
     {
         public List<CandidateProfile> GetCandidates()
         => CandidateProfileDAO.Instance.GetCandidates();
+        public CandidateProfile GetCandidateProfileById(string id)
+        => CandidateProfileDAO.Instance.GetCandidateProfileById(id);
+        public bool AddCandidateProfile(CandidateProfile candidateProfile)
+        => CandidateProfileDAO.Instance.AddCandidateProfile(candidateProfile);
+        public bool DeleteCandidateProfile(CandidateProfile candidateProfile)
+        => CandidateProfileDAO.Instance.DeleteCandidateProfile(candidateProfile);
+
+        public bool UpdateCandidateProfile(CandidateProfile candidateProfile)
+        => CandidateProfileDAO.Instance.UpdateCandidateProfile(candidateProfile);
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CandidateManagement_Repositories
 {
-    public interface IHRAccountRepo
+    public interface IJobPostingRepo
     {
-        public Hraccount GetHraccountByEmail(string email);
-        public List<Hraccount> GetHraccounts();
+        public List<JobPosting> GetJobPostings();
+        public JobPosting GetJobPostings(string id);
     }
 }

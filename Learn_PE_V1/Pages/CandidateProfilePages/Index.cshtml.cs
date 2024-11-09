@@ -35,6 +35,7 @@ namespace Learn_PE_V1.Pages.CandidateProfilePages
            .Skip((CurrentPage - 1) * PageSize)
            .Take(PageSize)
            .ToList();
+
             return Page(); 
         }
     }

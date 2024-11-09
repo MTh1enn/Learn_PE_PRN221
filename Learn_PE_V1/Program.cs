@@ -7,6 +7,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddSession();
 builder.Services.AddScoped<IHRAccountRepo, HRAccountRepo>();
 builder.Services.AddScoped<ICandidateProfileRepo, CandidateProfileRepo>();
+builder.Services.AddScoped<IJobPostingRepo, JobPostingRepo>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
